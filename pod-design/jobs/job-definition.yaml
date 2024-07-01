@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: math-add-job
+spec:
+  # Runs 3 separate jobs/pods to SUCCESSFUL COMPLETION. 
+  # Pods are created Sequentially by default (see parallelism below to run in parallel): 2nd pod is created ONLY AFTER the 1st one is finished.
+  # If a job is NOT SUCCESSFUL, it will create another job/pod until it creates a successful one until the desired number of completions is reached
+  completions: 3
+  # Runs 3 separate jobs/pods in parallel
+  parallelism: 3
+  template:
+    spec:
+      containers:
+      - name: math-add
+        image: ubuntu
+        command: ["expr", '3', '+', '2']
+        # kubectl logs <pod_name> -> to see output
+      restartPolicy: Never
+
