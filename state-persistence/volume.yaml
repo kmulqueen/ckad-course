@@ -20,6 +20,8 @@ spec:
 
   volumes:
   - name: data-volume
-    hostPath:
+    hostPath: # For data stored on node/host
       path: /data
       type: Directory
+    # persistentVolumeClaim: # When using a PVC, this would replace the hostPath
+    #   claimName: claim-name
