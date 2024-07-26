@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "myapp-pod"
+  namespace: default
+  labels:
+    app: "mysql"
+spec:
+  containers:
+  - name: mysql
+    image: mysql
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+  # Creates DNS entries for the pod after the headless service is created, and only if the following 2 items are set
+  subdomain: mysql-h # For headless service. value must match the name of the headless service
+  hostname: mysql-pod # Creates A records for the pod
